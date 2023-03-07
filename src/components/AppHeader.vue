@@ -4,10 +4,15 @@
         <div class="container">
             <div class="row">
                 <h1>
-                    BOOLFLIX
+                    {{ title }}
                 </h1>
                 <div class="input-search">
-                    <input type="text" placeholder="Cerca il film che fa per te...">
+                    <input 
+                    type="text" 
+                    placeholder="Cerca il film che fa per te..."
+                    v-model="inputSearch"
+                    >
+                    <button>SEARCH</button>
                 </div>
             </div>
         </div>
@@ -18,8 +23,20 @@
 
 <script>
 
-    export default {
+    import store from '../store'
 
+    export default {
+        data() {
+            return {
+                title: 'BOOLFLIX',
+                store,
+            }
+        },
+        computed: {
+            inputSearch() {
+                return this.store.inputSearch
+            },
+        }
     }
 
 </script>
@@ -39,7 +56,5 @@
             padding: 0 20px;
         }
     }
-
-    
 
 </style>
