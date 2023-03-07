@@ -1,10 +1,18 @@
 <template>
 
     <li>
-        <h3>{{ movie.title }}</h3>
-    <h4>{{ movie.original_title }}</h4>
-    <p>{{ movie.overview }}</p>
-    <p>{{ movie.vote_average }}</p>
+        <h2>
+            {{ movie.title }}
+        </h2>
+        <h3>
+            {{ movie.original_title }}
+        </h3>
+        <p>
+            {{ movie.overview }}
+        </p>
+        <p>
+            {{ movie.vote_average }}
+        </p>
     </li>
 
 
@@ -12,6 +20,8 @@
 
 
 <script>
+import store from '../store';
+
     export default {
         props: {
             // passo l'oggetto intero
@@ -19,7 +29,12 @@
                 type: Object,
                 required: true,
             }
-        }
+        },
+        data() {
+            return {
+                store,
+            }
+        },
     }
 
 </script>
