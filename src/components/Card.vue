@@ -13,7 +13,9 @@
         <p>
             {{ movie.vote_average }}
         </p>
-        <img :src="getFlag(movie.original_language)" alt=" IMMAGINE NON DISPONIBILE ">
+        <div class="flag">
+            <img v-if="getFlag(movie.original_language) !== ''" :src="getFlag(movie.original_language)" alt=" IMMAGINE NON DISPONIBILE ">
+        </div>
     </li>
 
 
@@ -53,7 +55,7 @@ import store from '../store';
 
                 return imageUrl
             }
-        }
+        },
     }
 
 </script>
@@ -61,8 +63,10 @@ import store from '../store';
 
 
 <style lang="scss">
+    .flag {
+        width: 50px;
+    }
 
-    
 
 
 </style>
