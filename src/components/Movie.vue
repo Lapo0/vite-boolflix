@@ -1,6 +1,9 @@
 <template>
 
     <li>
+        <div class="poster">
+            <img :src="`https://image.tmdb.org/t/p/w342${card.poster_path}`" alt="">
+        </div>
         <h2>
             {{ card.title }}
         </h2>
