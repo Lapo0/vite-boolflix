@@ -32,10 +32,6 @@
                 return this.store.movies
             },
         },
-
-        watch: {
-
-        }
     }
 
 </script>

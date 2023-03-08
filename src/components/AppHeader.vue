@@ -49,6 +49,7 @@
                 })
                 .then((res) => {
                     console.log(res.data.results)
+                    console.log(res.data)
                     this.store.movies = res.data.results
                 })
             },
