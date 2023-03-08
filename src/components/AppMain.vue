@@ -2,9 +2,15 @@
     <main>
         <div class="container">
             <ul class="cards">
-                <Card v-for="movie in movies"
+                <Movie v-for="movie in movies"
                 :key="movie.id"
-                :movie="movie"
+                :card="movie"
+                />
+            </ul>
+            <ul class="cards">
+                <TvSeries v-for="serie in series"
+                :key="serie.id"
+                :card="serie"
                 />
             </ul>
         </div>
@@ -16,11 +22,14 @@
 <script>
     import store from '../store'
 
-    import Card from '/src/components/Card.vue'
+    import Movie from '/src/components/Movie.vue'
+
+    import TvSeries from '/src/components/TvSeries.vue'
     
     export default {
         components: {
-            Card,
+            Movie,
+            TvSeries,
         },
         data() {
             return {
@@ -30,6 +39,9 @@
         computed: {
             movies() {
                 return this.store.movies
+            },
+            series() {
+                return this.store.tvSeries
             },
         },
     }

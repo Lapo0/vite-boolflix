@@ -2,19 +2,19 @@
 
     <li>
         <h2>
-            {{ movie.title }}
+            {{ card.title }}
         </h2>
         <h3>
-            {{ movie.original_title }}
+            {{ card.original_title }}
         </h3>
         <p>
-            {{ movie.overview }}
+            {{ card.overview }}
         </p>
         <p>
-            {{ movie.vote_average }}
+            {{ card.vote_average }}
         </p>
         <div class="flag">
-            <img v-if="getFlag(movie.original_language) !== ''" :src="getFlag(movie.original_language)" alt=" IMMAGINE NON DISPONIBILE ">
+            <img v-if="getFlag(card.original_language) !== ''" :src="getFlag(card.original_language)" alt=" IMMAGINE NON DISPONIBILE ">
         </div>
     </li>
 
@@ -28,7 +28,7 @@ import store from '../store';
     export default {
         props: {
             // passo l'oggetto intero
-            movie: {
+            card: {
                 type: Object,
                 required: true,
             }
@@ -66,7 +66,5 @@ import store from '../store';
     .flag {
         width: 50px;
     }
-
-
 
 </style>
