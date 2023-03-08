@@ -2,7 +2,8 @@
 
     <li>
         <div class="poster">
-            <img :src="`https://image.tmdb.org/t/p/w342${card.poster_path}`" alt="">
+            <img v-if="card.poster_path !== null" :src="`https://image.tmdb.org/t/p/w342${card.poster_path}`" alt="">
+            <img v-else :src="'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTUvv7RNcrfMcGmpDe6sPGKRX37X6eSjQbSA&usqp=CAU'" alt="">
         </div>
         <h2>
             {{ card.title }}
@@ -14,10 +15,15 @@
             {{ card.overview }}
         </p>
         <p>
-            {{ card.vote_average }}
+            {{ vote(card.vote_average) }}
+            <i 
+            v-for="star in 5"
+            class="fa-star"
+            :class="star <= vote(card.vote_average) ? 'fa-solid' : 'fa-regular'"
+            ></i>
         </p>
         <div class="flag">
-            <img v-if="getFlag(card.original_language) !== ''" :src="getFlag(card.original_language)" alt=" IMMAGINE NON DISPONIBILE ">
+            <img v-if="getFlag(card.original_language) !== null" :src="getFlag(card.original_language)" alt=" IMMAGINE NON DISPONIBILE ">
         </div>
     </li>
 
@@ -44,7 +50,7 @@ import store from '../store';
         methods: {
             getFlag(originalLanguage) {
 
-                let imageUrl = ''
+                let imageUrl = null
 
                 if (originalLanguage === 'en') {
                     imageUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Flag_of_the_United_Kingdom_%281-2%29.svg/420px-Flag_of_the_United_Kingdom_%281-2%29.svg.png'
@@ -53,11 +59,14 @@ import store from '../store';
                 } else if (originalLanguage === 'fr') {
                     imageUrl = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAATlBMVEX8/v82NIPdACc0JzArKDM2NIY1LFYoGCcqJn2bn7/iRUbdACLjACeCHS+Sj5Q0JzMvISwqJTI0KUEwJlNiXnOUlZiFMzriACHoACZWJDF8d8UvAAABPklEQVR4nO3Q2QGCUBAEsKcgXuAiePbfqNqD85eUkFbVpcz7nGufUtVqGULW2yXm/phS3tW6YRdyOLac03PMeE3972STkT05bzNGJ06cOHHixIkTJ06cOHHixIkTJ06cOHHixIkTJ06cOHHixIkTJ06cOHHixIkTJ06cOHHixIkTJ06cOHHixIkTJ06cOHHixIkTJ06cOHHixIkTJ06cOHHixIkTJ06cOHHixIkTJ06cOHHixIkTJ06cOHHixIkTJ06cOHHixIkTJ06cOHHixIkTJ06cOHHixIkTJ06cOHHixIkTJ06cOHHixIkTJ06cOHHixIkTJ06cOHHixIkTJ06cOHHixIkTJ06cOHHixIkTJ06cOHHixIkTJ06cOPnvSUj25DlmvL4ntQwh6+0Sc39MKe9qVV3KvM+59ilVHx/LG7A0BxrwAAAAAElFTkSuQmCC'
                 } else {
-                    imageUrl = ''
+                    imageUrl = null
                 }
 
                 return imageUrl
-            }
+            },
+            vote(vote) {
+                return parseInt(Math.ceil(vote /= 2))
+            },
         },
     }
 

@@ -22,6 +22,8 @@
 <script>
     import store from '../store'
 
+    import '@fortawesome/fontawesome-free/css/all.css'
+
     import Movie from '/src/components/Movie.vue'
 
     import TvSeries from '/src/components/TvSeries.vue'
