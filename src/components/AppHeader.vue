@@ -6,21 +6,24 @@
                 <h1 class="col-auto fw-bold title">
                     {{ title }}
                 </h1>
-                <div class="input-group flex-nowrap col-auto">
-                    <span class="input-group-text bg-light" id="addon-wrapping">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </span>
-                    <input 
-                    type="text" 
-                    id="input"
-                    class="bg-light border-start-0"
-                    :class="{ 'big-input': clickInput }"
-                    placeholder="Cerca il film che fa per te..."
-                    v-model="this.store.inputSearch"
-                    @keyup.enter="fetchCard"
-                    >
-                    <button @click="isClickInput" type="button" class="btn btn-outline-danger">SEARCH</button>
+                <div class="input-container col-auto">
+                    <div class="input-group flex-nowrap">
+                        <span @click="isClickInput" class="input-group-text bg-light" id="addon-wrapping">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </span>
+                        <input 
+                            type="text" 
+                            id="input"
+                            class="bg-light border-start-0"
+                            :class="{ 'big-input': clickInput }"
+                            placeholder="Cerca il film che fa per te..."
+                            v-model="this.store.inputSearch"
+                            @keyup.enter="fetchCard"
+                        >
+                        <button @click="isClickInput" type="button" class="btn btn-outline-danger">SEARCH</button>
+                    </div>
                 </div>
+                
             </div>
         </div>
     </header>
