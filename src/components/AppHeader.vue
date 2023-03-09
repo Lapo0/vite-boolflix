@@ -1,5 +1,4 @@
 <template>
-
     <header>
         <div class="container">
             <div class="row">
@@ -23,11 +22,9 @@
                         <button @click="isClickInput" type="button" class="btn btn-outline-danger">SEARCH</button>
                     </div>
                 </div>
-                
             </div>
         </div>
     </header>
-
 </template>
 
 

@@ -4,30 +4,33 @@
         <div class="poster">
             <img v-if="card.poster_path !== null" :src="`https://image.tmdb.org/t/p/w342${card.poster_path}`" alt="">
             <img v-else :src="'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTUvv7RNcrfMcGmpDe6sPGKRX37X6eSjQbSA&usqp=CAU'" alt="">
+            <div class="text">
+            
+                <h2>
+                    {{ card.name }}
+                </h2>
+                <h3>
+                    {{ card.original_name }}
+                </h3>
+                <p class="overview">
+                    {{ card.overview }}
+                </p>
+                <div class="flag">
+                    <img v-if="getFlag(card.original_language) !== null" :src="getFlag(card.original_language)" alt=" IMMAGINE NON DISPONIBILE ">
+                </div>
+                <p>
+                    {{ vote(card.vote_average) }}
+                    <i
+                    v-for="star in 5"
+                    class="fa-star"
+                    :class="star <= vote(card.vote_average) ? 'fa-solid' : 'fa-regular'"
+                    >
+                    </i>
+                </p>
+            </div>
         </div>
-        <h2>
-            {{ card.name }}
-        </h2>
-        <h3>
-            {{ card.original_name }}
-        </h3>
-        <p>
-            {{ card.overview.length > 25 ?
-    card.overview.slice(0, 25) + "..." :
-    card.overview }}
-        </p>
-        <p>
-            {{ vote(card.vote_average) }}
-            <i
-            v-for="star in 5"
-            class="fa-star"
-            :class="star <= vote(card.vote_average) ? 'fa-solid' : 'fa-regular'"
-            >
-            </i>
-        </p>
-        <div class="flag">
-            <img v-if="getFlag(card.original_language) !== null" :src="getFlag(card.original_language)" alt=" IMMAGINE NON DISPONIBILE ">
-        </div>
+        
+        
     </li>
 
 
@@ -80,6 +83,22 @@ import store from '../store';
 <style lang="scss">
     .flag {
         width: 50px;
+    }
+
+    .poster {
+        position: relative;
+
+        .text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 10px;
+            color: white;
+
+            .overview {
+                display: none;
+            }
+        }
     }
 
 </style>

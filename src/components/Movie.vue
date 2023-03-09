@@ -12,20 +12,20 @@
                 <h3>
                     {{ card.original_title }}
                 </h3>
-                <p>
+                <p class="overview">
                     {{ card.overview }}
                 </p>
-                <p>
-                    {{ vote(card.vote_average) }}
+                <div class="flag">
+                    <img v-if="getFlag(card.original_language) !== null" :src="getFlag(card.original_language)" alt=" IMMAGINE NON DISPONIBILE ">
+                </div>
+                <p class="vote">
                     <i 
                     v-for="star in 5"
                     class="fa-star"
                     :class="star <= vote(card.vote_average) ? 'fa-solid' : 'fa-regular'"
                     ></i>
                 </p>
-                <div class="flag">
-                    <img v-if="getFlag(card.original_language) !== null" :src="getFlag(card.original_language)" alt=" IMMAGINE NON DISPONIBILE ">
-                </div>
+                
             </div>
         </div>
     </li>
@@ -86,12 +86,26 @@ import store from '../store';
             position: absolute;
             top: 0;
             left: 0;
-            margin: 10px;
+            margin: 0 auto;
+            color: white;
+            text-align: center;
+            width: 90%;
+
+            &.expand {
+                transform: sca;
+            }
+
+            .flag {
+                margin-left: auto ;
+                width: 50px;
+                border-radius: 999px;
+            }
+
+            .vote {
+                text-align: left;
+            }
         }
     }
 
-    .flag {
-        width: 50px;
-    }
 
 </style>

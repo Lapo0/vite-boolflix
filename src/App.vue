@@ -34,7 +34,6 @@
   .back {
     background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTteZdNLC-5NugELeMXh_yLLEVmQ1AxDis4JA&usqp=CAU);
     background-position: center;
-    background-size: cover;
   }
 
 </style>
