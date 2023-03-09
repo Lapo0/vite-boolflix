@@ -5,7 +5,7 @@
                 <h1 class="col-auto fw-bold title">
                     {{ title }}
                 </h1>
-                <div class="input-container col-auto">
+                <div class="input-container w-50">
                     <div class="input-group flex-nowrap">
                         <span @click="isClickInput" class="input-group-text bg-light" id="addon-wrapping">
                             <i class="fa-solid fa-magnifying-glass"></i>
@@ -134,7 +134,7 @@
                     transition: width 2s;
 
                     &.big-input {
-                        width: 100%;
+                        width: 300px;
                     }
                 }
             }

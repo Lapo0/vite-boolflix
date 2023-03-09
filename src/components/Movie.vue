@@ -28,6 +28,8 @@
                 
             </div>
         </div>
+
+       
     </li>
 
 
@@ -89,7 +91,8 @@ import store from '../store';
             margin: 0 auto;
             color: white;
             text-align: center;
-            width: 90%;
+            width: 75%;
+            display: none;
 
             &.expand {
                 transform: sca;
