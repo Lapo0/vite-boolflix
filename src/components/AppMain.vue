@@ -21,7 +21,7 @@
             <div class="modal fade" id="cardInfo" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
-                        <img class="img-poster" v-if="store.selectedCard.poster_path !== null" :src="`https://image.tmdb.org/t/p/w342${store.selectedCard.poster_path}`" alt="">
+                        <img class="img-poster" v-if="store.selectedCard.poster_path !== null" :src="`https://image.tmdb.org/t/p/w1280${store.selectedCard.backdrop_path}`" alt="">
                         <img class="img-poster" v-else :src="'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTUvv7RNcrfMcGmpDe6sPGKRX37X6eSjQbSA&usqp=CAU'" alt="">
                         <div class="modal-header">
                             <div class="title">
@@ -161,13 +161,6 @@
                 transform: scale(1.1);
                 filter: drop-shadow(16px 16px 20px red)
             }
-        }
-
-        .modal-content img.img-poster {
-            object-fit: cover;
-            object-position: center;
-            width: 200%;
-            height: 500px;
         }
 
         .modal-footer {
