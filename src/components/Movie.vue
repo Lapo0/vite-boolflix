@@ -4,26 +4,29 @@
         <div class="poster">
             <img v-if="card.poster_path !== null" :src="`https://image.tmdb.org/t/p/w342${card.poster_path}`" alt="">
             <img v-else :src="'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTUvv7RNcrfMcGmpDe6sPGKRX37X6eSjQbSA&usqp=CAU'" alt="">
-        </div>
-        <h2>
-            {{ card.title }}
-        </h2>
-        <h3>
-            {{ card.original_title }}
-        </h3>
-        <p>
-            {{ card.overview }}
-        </p>
-        <p>
-            {{ vote(card.vote_average) }}
-            <i 
-            v-for="star in 5"
-            class="fa-star"
-            :class="star <= vote(card.vote_average) ? 'fa-solid' : 'fa-regular'"
-            ></i>
-        </p>
-        <div class="flag">
-            <img v-if="getFlag(card.original_language) !== null" :src="getFlag(card.original_language)" alt=" IMMAGINE NON DISPONIBILE ">
+            
+            <div class="text">
+                <h2>
+                    {{ card.title }}
+                </h2>
+                <h3>
+                    {{ card.original_title }}
+                </h3>
+                <p>
+                    {{ card.overview }}
+                </p>
+                <p>
+                    {{ vote(card.vote_average) }}
+                    <i 
+                    v-for="star in 5"
+                    class="fa-star"
+                    :class="star <= vote(card.vote_average) ? 'fa-solid' : 'fa-regular'"
+                    ></i>
+                </p>
+                <div class="flag">
+                    <img v-if="getFlag(card.original_language) !== null" :src="getFlag(card.original_language)" alt=" IMMAGINE NON DISPONIBILE ">
+                </div>
+            </div>
         </div>
     </li>
 
@@ -75,6 +78,18 @@ import store from '../store';
 
 
 <style lang="scss">
+
+    .poster {
+        position: relative;
+
+        .text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 10px;
+        }
+    }
+
     .flag {
         width: 50px;
     }

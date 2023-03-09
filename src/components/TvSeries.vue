@@ -6,17 +6,22 @@
             <img v-else :src="'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTUvv7RNcrfMcGmpDe6sPGKRX37X6eSjQbSA&usqp=CAU'" alt="">
         </div>
         <h2>
-            {{ card.original_name }}
+            {{ card.name }}
         </h2>
+        <h3>
+            {{ card.original_name }}
+        </h3>
         <p>
-            {{ card.overview }}
+            {{ card.overview.length > 25 ?
+    card.overview.slice(0, 25) + "..." :
+    card.overview }}
         </p>
         <p>
             {{ vote(card.vote_average) }}
             <i
             v-for="star in 5"
             class="fa-star"
-            :class="star <= card.vote_average ? 'fa-solid' : 'fa-regular'"
+            :class="star <= vote(card.vote_average) ? 'fa-solid' : 'fa-regular'"
             >
             </i>
         </p>

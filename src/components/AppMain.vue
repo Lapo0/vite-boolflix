@@ -54,5 +54,15 @@
 
 <style lang="scss">
 
+    main {
+        height: 90vh;
+
+        .cards {
+            display: grid;
+            gap: 40px;
+            grid-template-columns: repeat(3,1fr);
+        }
+    }
+
 
 </style>

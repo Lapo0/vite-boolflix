@@ -3,17 +3,23 @@
     <header>
         <div class="container">
             <div class="row">
-                <h1>
+                <h1 class="col-auto fw-bold title">
                     {{ title }}
                 </h1>
-                <div class="input-search">
+                <div class="input-group flex-nowrap col-auto">
+                    <span class="input-group-text bg-light" id="addon-wrapping">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
                     <input 
                     type="text" 
+                    id="input"
+                    class="bg-light border-start-0"
+                    :class="{ 'big-input': clickInput }"
                     placeholder="Cerca il film che fa per te..."
                     v-model="this.store.inputSearch"
                     @keyup.enter="fetchCard"
                     >
-                    <button @click="fetchCard">SEARCH</button>
+                    <button @click="isClickInput" type="button" class="btn btn-outline-danger">SEARCH</button>
                 </div>
             </div>
         </div>
@@ -32,6 +38,7 @@
             return {
                 title: 'BOOLFLIX',
                 store,
+                clickInput: false,
             }
         },
         computed: {
@@ -76,8 +83,14 @@
                     })
                     
             },
+            isClickInput() {
+                console.log('buttonclick')
+                this.clickInput = true
+
+                this.fetchCard
+            },
+
         },
-        
         // created per vedere il proxy
         created() {
             console.log('store',this.store)
@@ -91,16 +104,43 @@
 
 <style lang="scss">
 
-    .row {
+    header {
+        height: 10vh;
+        padding-top: 20px;
+
+        .row {
         align-items: center;
         justify-content: space-between;
 
-        input {
-            line-height: 40px;
-            font-size: 20px;
-            border-radius: 25px;
-            padding: 0 20px;
+        .title {
+            font-size: 60px;
+            color: red;
+        }
+
+            .input-group {
+                max-width: 50%;
+
+                .input-group-text {
+                border-radius: 1.25rem 0 0 1.25rem;
+
+                }
+
+                input {
+                    line-height: 40px;
+                    font-size: 20px;
+                    border-radius: 25px;
+                    padding: 0 20px;
+                    width: 0;
+                    transition: width 2s;
+
+                    &.big-input {
+                        width: 100%;
+                    }
+                }
+            }
         }
     }
+
+   
 
 </style>
