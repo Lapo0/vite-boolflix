@@ -1,58 +1,89 @@
 <template>
-
-    <li>
-        <div class="poster">
-            <img v-if="card.poster_path !== null" :src="`https://image.tmdb.org/t/p/w342${card.poster_path}`" alt="">
-            <img v-else :src="'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTUvv7RNcrfMcGmpDe6sPGKRX37X6eSjQbSA&usqp=CAU'" alt="">
-            
-            <div class="text">
-                <h2>
-                    {{ card.title }}
-                </h2>
-                <h3>
-                    {{ card.original_title }}
-                </h3>
-                <p class="overview">
-                    {{ card.overview }}
-                </p>
-                <div class="flag">
-                    <img v-if="getFlag(card.original_language) !== null" :src="getFlag(card.original_language)" alt=" IMMAGINE NON DISPONIBILE ">
+    <div class="modal fade" id="cardInfo" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <img class="img-poster" v-if="store.selectedCard.poster_path !== undefined" :src="`https://image.tmdb.org/t/p/w1280${store.selectedCard.backdrop_path}`" alt="">
+                <img class="img-poster" v-else :src="'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTUvv7RNcrfMcGmpDe6sPGKRX37X6eSjQbSA&usqp=CAU'" alt="">
+                <div class="modal-header">
+                    <div class="title">
+                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">
+                            {{ store.selectedCard.title ? store.selectedCard.title : store.selectedCard.name }}
+                        </h1>
+                        <h2 v-if="store.selectedCard.title !== store.selectedCard.original_title">
+                            {{ store.selectedCard.original_title ? store.selectedCard.original_title : store.selectedCard.originan_name }}
+                        </h2>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
                 </div>
-                <div class="vote">
-                    <i 
-                    v-for="star in 5"
-                    class="fa-star"
-                    :class="star <= vote(card.vote_average) ? 'fa-solid' : 'fa-regular'"
-                    ></i>
+                <div class="modal-body">
+                    <div class="people" v-for="(people, i) in store.cast.slice(0, 5)" :key="store.cast.id">
+                        <p class="name">
+                            {{ store.cast[i].name }}
+                        </p>
+                        <p class="character">
+                            {{ store.cast[i].character }}
+                        </p>
+                    </div>
                 </div>
-                
+                <div class="modal-footer">
+                    <div class="star">
+                        <i 
+                            v-for="star in 5"
+                            class="fa-star"
+                            :class="star <= vote(store.selectedCard.vote_average) ? 'fa-solid' : 'fa-regular'"
+                        ></i>
+                    </div>
+                    <button class="btn btn-danger" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">
+                        Altre Info
+                    </button>
+                </div>
             </div>
         </div>
-
-       
-    </li>
-
+    </div>
+    <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">
+                        Overview
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        {{ store.selectedCard.overview }}
+                    </p>
+                    <div class="flag">
+                    <img v-if="getFlag(store.selectedCard.original_language) !== null" :src="getFlag(store.selectedCard.original_language)" alt="">
+                </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" data-bs-target="#cardInfo" data-bs-toggle="modal">
+                        Back to first
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </template>
 
 
 <script>
-import store from '../store';
+    import store from '../store'
 
     export default {
-        props: {
-            // passo l'oggetto intero
-            card: {
-                type: Object,
-                required: true,
-            }
-        },
         data() {
             return {
                 store,
             }
         },
         methods: {
+            vote(vote) {
+                return parseInt(Math.ceil(vote /= 2))
+            },
             getFlag(originalLanguage) {
 
                 let imageUrl = null
@@ -69,9 +100,6 @@ import store from '../store';
 
                 return imageUrl
             },
-            vote(vote) {
-                return parseInt(Math.ceil(vote /= 2))
-            },
         },
     }
 
@@ -80,31 +108,6 @@ import store from '../store';
 
 
 <style lang="scss">
-
-    .poster {
-        position: relative;
-
-        .text {
-            position: absolute;
-            top: 0;
-            left: 0;
-            margin: 0 auto;
-            color: white;
-            text-align: center;
-            width: 75%;
-            display: none;
-
-            .flag {
-                margin-left: auto ;
-                width: 50px;
-                border-radius: 999px;
-            }
-
-            .vote {
-                text-align: left;
-            }
-        }
-    }
 
 
 </style>

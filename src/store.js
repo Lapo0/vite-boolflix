@@ -5,6 +5,7 @@ const store = reactive({
     tvSeries: [],
     inputSearch: '',
     idCard: '',
+    cast: '',
     selectedCard: '',
     config: {
 		API_KEY: '58623a99a2c476889e8b156ffe3ae51b',
