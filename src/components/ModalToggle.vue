@@ -18,10 +18,10 @@
                 </div>
                 <div class="modal-body">
                     <div class="people" v-for="(people, i) in store.cast.slice(0, 5)" :key="store.cast.id">
-                        <p class="name">
+                        <p class="name mb-0">
                             {{ store.cast[i].name }}
                         </p>
-                        <p class="character">
+                        <p class="character mb-0 w-50">
                             {{ store.cast[i].character }}
                         </p>
                     </div>
@@ -108,6 +108,27 @@
 
 
 <style lang="scss">
+    .people {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .name {
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .character {
+            font-style: oblique;
+            font-weight: 700;
+        }
+
+        & > *:hover {
+            color: red;
+            cursor: pointer;
+        }
+
+    }
 
 
 </style>
