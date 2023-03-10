@@ -50,6 +50,8 @@
             fetchCard() {
                 console.log('fetchCard')
 
+                this.genresMovie()
+
                 this.fetchMovies()
 
                 this.fetchTvSeries()
@@ -81,7 +83,17 @@
                         this.store.tvSeries = res.data.results
                         console.log(res.data.results)
                     })
-                    
+            },
+            genresMovie() {
+                console.log('yaaaaaaaaa')
+
+                axios
+                    .get(`https://api.themoviedb.org/3/movie/${this.store.idCard}?api_key=58623a99a2c476889e8b156ffe3ae51b`, {
+
+                    })
+                    .then((res) => {
+                        console.log(res.data.genres)
+                    })
             },
             isClickInput() {
                 console.log('buttonclick')

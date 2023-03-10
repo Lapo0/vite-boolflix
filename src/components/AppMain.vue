@@ -68,12 +68,17 @@
 
                 console.log('card click = ', id)
                 this.store.idCard = id
-                
-                this.fetchActorsMovie()
-                this.fetchActorsSerie()
 
-                this.store.selectedCard = this.movies.find(movie => movie.id === this.idCard) || this.series.find(serie => serie.id === this.idCard);
-                console.log(this.store.selectedCard)
+                const selectedMovie = this.movies.find(movie => movie.id === id)
+                const selectedSerie = this.series.find(serie => serie.id === id)
+                
+                if (selectedMovie) {
+                    this.store.selectedCard = selectedMovie
+                    this.fetchActorsMovie()
+                } else if (selectedSerie) {
+                    this.store.selectedCard = selectedSerie
+                    this.fetchActorsSerie()
+                }
             },
             fetchActorsMovie() {
                 console.log(this.store.idCard)
@@ -85,7 +90,6 @@
                     .then((res) => {
                         console.log(res.data.cast[0].name)
                         console.log(res.data.cast[0].character)
-                        console.log(res.data.cast[0].id)
 
                         this.store.cast = res.data.cast
                         console.log(this.store.cast)
@@ -101,7 +105,6 @@
                     .then((res) => {
                         console.log(res.data.cast[0].name)
                         console.log(res.data.cast[0].character)
-                        console.log(res.data.cast[0].id)
 
                         this.store.cast = res.data.cast
                         console.log(this.store.cast)
