@@ -64,23 +64,23 @@
             },
         },
         methods: {
-            cardClick(index) {
-                console.log('card click = ', index)
-                this.store.idCard = index
+            cardClick(id) {
+
+                console.log('card click = ', id)
+                this.store.idCard = id
                 
-                this.fetchActors()
+                this.fetchActorsMovie()
+                this.fetchActorsSerie()
 
                 this.store.selectedCard = this.movies.find(movie => movie.id === this.idCard) || this.series.find(serie => serie.id === this.idCard);
                 console.log(this.store.selectedCard)
             },
-            fetchActors() {
+            fetchActorsMovie() {
                 console.log(this.store.idCard)
                 
                 axios
                     .get(`https://api.themoviedb.org/3/movie/${this.store.idCard}/credits?api_key=58623a99a2c476889e8b156ffe3ae51b`, {
-                        params: {
-                            person_id: this.store.idCard
-                        }
+                        
                     })
                     .then((res) => {
                         console.log(res.data.cast[0].name)
@@ -90,7 +90,23 @@
                         this.store.cast = res.data.cast
                         console.log(this.store.cast)
                     })
-            }
+            },
+            fetchActorsSerie() {
+                console.log(this.store.idCard)
+                
+                axios
+                    .get(`https://api.themoviedb.org/3/tv/${this.store.idCard}/credits?api_key=58623a99a2c476889e8b156ffe3ae51b`, {
+                        
+                    })
+                    .then((res) => {
+                        console.log(res.data.cast[0].name)
+                        console.log(res.data.cast[0].character)
+                        console.log(res.data.cast[0].id)
+
+                        this.store.cast = res.data.cast
+                        console.log(this.store.cast)
+                    })
+            },
         },
     }
 

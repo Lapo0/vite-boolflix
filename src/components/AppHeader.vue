@@ -87,9 +87,8 @@
                 console.log('buttonclick')
                 this.clickInput = true
 
-                this.fetchCard
+                this.fetchCard()
             },
-
         },
         // created per vedere il proxy
         created() {
